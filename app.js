@@ -52,5 +52,11 @@ start.addEventListener("click", () => {
 });
 
 pause.addEventListener("click", () => {
-  isPause = true;
+  if (!isPause) {
+    isPause = true;
+    pause.innerHTML = "Resume";
+  } else {
+    isPause = false;
+    pause.innerHTML = "Pause";
+  }
 });
