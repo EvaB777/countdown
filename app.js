@@ -40,8 +40,8 @@ const countDown = (minutes, id) => {
 };
 
 start.addEventListener("click", () => {
-  countDown(0.2, "warmup")
-    .then(() => countDown(0.2, "round1"))
+  countDown(0.1, "warmup")
+    .then(() => countDown(0.1, "round1"))
     .then(() => countDown(1, "break1"))
     .then(() => countDown(7, "round2"))
     .then(() => countDown(1, "break2"))
