@@ -14,24 +14,27 @@ const countDown = (minutes, id) => {
   removeActiveClasses();
   document.getElementById(id).classList.add("active");
   return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      let timer = minutes * 60 * 1000;
+    let timer = minutes * 60;
 
-      let x = setInterval(function () {
-        let minutes = Math.floor((timer % (1000 * 60 * 60)) / (1000 * 60));
-        let seconds = Math.floor((timer % (1000 * 60)) / 1000);
+    let x = setInterval(function () {
+      console.log(timer);
+      timer--;
 
-        document.getElementById(id).innerHTML = minutes + "m " + seconds + "s ";
+      let minutes = Math.floor(
+        ((timer * 1000) % (1000 * 60 * 60)) / (1000 * 60)
+      );
+      let seconds = Math.floor(((timer * 1000) % (1000 * 60)) / 1000);
 
-        if (timer <= 0) {
-          clearInterval(x);
-          audio.play();
-          document.getElementById(id).innerHTML = "Done ✔️";
-          document.getElementById(id).classList.add("done");
-          resolve();
-        }
-      }, 1000);
-    }, minutes);
+      document.getElementById(id).innerHTML = minutes + "m " + seconds + "s ";
+
+      if (timer <= 0) {
+        clearInterval(x);
+        audio.play();
+        document.getElementById(id).innerHTML = "Done ✔️";
+        document.getElementById(id).classList.add("done");
+        resolve();
+      }
+    }, 1000);
   });
 };
 
