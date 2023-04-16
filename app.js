@@ -2,6 +2,8 @@ let start = document.querySelector("#start");
 let pause = document.querySelector("#pause");
 let sections = document.querySelectorAll(".section");
 let isPause = false;
+let active = document.querySelector(".active");
+let activeArray = document.getElementsByClassName("active");
 
 let audio = new Audio("sound.mp3");
 
@@ -23,9 +25,8 @@ const countDown = (minutes, id) => {
           ((timer * 1000) % (1000 * 60 * 60)) / (1000 * 60)
         );
         let seconds = Math.floor(((timer * 1000) % (1000 * 60)) / 1000);
-
-        document.getElementById(id).innerHTML = minutes + "m " + seconds + "s ";
         timer--;
+        document.getElementById(id).innerHTML = minutes + "m " + seconds + "s ";
       }
       if (timer <= 0) {
         clearInterval(x);
@@ -55,8 +56,14 @@ pause.addEventListener("click", () => {
   if (!isPause) {
     isPause = true;
     pause.innerHTML = "Resume";
+    sections.forEach((section) => {
+      section.classList.replace("active", "pause");
+    });
   } else {
     isPause = false;
     pause.innerHTML = "Pause";
+    sections.forEach((section) => {
+      section.classList.replace("pause", "active");
+    });
   }
 });

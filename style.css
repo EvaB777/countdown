@@ -69,6 +69,7 @@ body {
   border-radius: 15px;
   width: 150px;
   transition: font-size 0.7s ease-in;
+  transform: flex 0.7s ease-in;
   font-weight: 400;
 }
 
@@ -76,7 +77,7 @@ body {
   /* background-color: rgb(128, 199, 240); */
   background-color: rgba(108, 98, 145, 0.7);
   flex: 10;
-  font-size: 4rem;
+  font-size: 3.5rem;
   width: 400px;
   padding: 5px 30px;
   border-radius: 60px;
@@ -86,4 +87,13 @@ body {
 .done {
   background-color: rgba(173, 235, 173, 0.8);
   color: #fff;
+}
+
+.pause {
+  background-color: rgba(138, 137, 141, 0.7);
+  flex: 10;
+  font-size: 3.5rem;
+  width: 400px;
+  padding: 5px 30px;
+  border-radius: 60px;
 }
