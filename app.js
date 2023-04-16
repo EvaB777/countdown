@@ -16,20 +16,14 @@ const countDown = (minutes, id) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       let timer = minutes * 60 * 1000;
-      let now = new Date().getTime();
-      let countDownDate = now + timer;
 
       let x = setInterval(function () {
-        let now = new Date().getTime();
-
-        let distance = countDownDate - now;
-
-        let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        let minutes = Math.floor((timer % (1000 * 60 * 60)) / (1000 * 60));
+        let seconds = Math.floor((timer % (1000 * 60)) / 1000);
 
         document.getElementById(id).innerHTML = minutes + "m " + seconds + "s ";
 
-        if (distance <= 0) {
+        if (timer <= 0) {
           clearInterval(x);
           audio.play();
           document.getElementById(id).innerHTML = "Done ✔️";
