@@ -17,16 +17,13 @@ const countDown = (minutes, id) => {
     let timer = minutes * 60;
 
     let x = setInterval(function () {
-      console.log(timer);
-      timer--;
-
       let minutes = Math.floor(
         ((timer * 1000) % (1000 * 60 * 60)) / (1000 * 60)
       );
       let seconds = Math.floor(((timer * 1000) % (1000 * 60)) / 1000);
 
       document.getElementById(id).innerHTML = minutes + "m " + seconds + "s ";
-
+      timer--;
       if (timer <= 0) {
         clearInterval(x);
         audio.play();
