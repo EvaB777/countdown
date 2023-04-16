@@ -1,6 +1,7 @@
 let start = document.querySelector("#start");
 let pause = document.querySelector("#pause");
 let sections = document.querySelectorAll(".section");
+let isPause = false;
 
 let audio = new Audio("sound.mp3");
 
@@ -17,13 +18,15 @@ const countDown = (minutes, id) => {
     let timer = minutes * 60;
 
     let x = setInterval(function () {
-      let minutes = Math.floor(
-        ((timer * 1000) % (1000 * 60 * 60)) / (1000 * 60)
-      );
-      let seconds = Math.floor(((timer * 1000) % (1000 * 60)) / 1000);
+      if (!isPause) {
+        let minutes = Math.floor(
+          ((timer * 1000) % (1000 * 60 * 60)) / (1000 * 60)
+        );
+        let seconds = Math.floor(((timer * 1000) % (1000 * 60)) / 1000);
 
-      document.getElementById(id).innerHTML = minutes + "m " + seconds + "s ";
-      timer--;
+        document.getElementById(id).innerHTML = minutes + "m " + seconds + "s ";
+        timer--;
+      }
       if (timer <= 0) {
         clearInterval(x);
         audio.play();
@@ -49,5 +52,5 @@ start.addEventListener("click", () => {
 });
 
 pause.addEventListener("click", () => {
-  alert("szünet");
+  isPause = true;
 });
