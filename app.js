@@ -13,6 +13,22 @@ function removeActiveClasses() {
   });
 }
 
+function pauseCountdown() {
+  if (!isPause) {
+    isPause = true;
+    pause.innerHTML = "Resume";
+    sections.forEach((section) => {
+      section.classList.replace("active", "pause");
+    });
+  } else {
+    isPause = false;
+    pause.innerHTML = "Pause";
+    sections.forEach((section) => {
+      section.classList.replace("pause", "active");
+    });
+  }
+}
+
 const countDown = (minutes, id) => {
   removeActiveClasses();
   document.getElementById(id).classList.add("active");
@@ -40,40 +56,25 @@ const countDown = (minutes, id) => {
 };
 
 start.addEventListener("click", () => {
-  countDown(0.1, "warmup")
-    .then(() => countDown(0.1, "round1"))
+  countDown(5, "warmup")
     .then(() => countDown(1, "break1"))
-    .then(() => countDown(7, "round2"))
+    .then(() => countDown(7, "round1"))
     .then(() => countDown(1, "break2"))
-    .then(() => countDown(7, "round3"))
+    .then(() => countDown(7, "round2"))
     .then(() => countDown(1, "break3"))
-    .then(() => countDown(7, "round4"))
+    .then(() => countDown(7, "round3"))
     .then(() => countDown(1, "break4"))
+    .then(() => countDown(7, "round4"))
+    .then(() => countDown(1, "break5"))
     .then(() => countDown(5, "cooldown"));
 });
 
-function pauseCountdown() {
-  if (!isPause) {
-    isPause = true;
-    pause.innerHTML = "Resume";
-    sections.forEach((section) => {
-      section.classList.replace("active", "pause");
-    });
-  } else {
-    isPause = false;
-    pause.innerHTML = "Pause";
-    sections.forEach((section) => {
-      section.classList.replace("pause", "active");
-    });
+window.addEventListener("keydown", (e) => {
+  if (e.code == "Space") {
+    pauseCountdown;
   }
-}
+});
 
 pause.addEventListener("click", () => {
   pauseCountdown();
-});
-
-document.addEventListener("keypress", (e) => {
-  if (e == " ") {
-    pauseCountdown;
-  }
 });
