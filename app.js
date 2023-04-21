@@ -4,6 +4,9 @@ let sections = document.querySelectorAll(".section");
 let isPause = false;
 let active = document.querySelector(".active");
 let activeArray = document.getElementsByClassName("active");
+let times = document.querySelectorAll("input");
+
+let currentTime = 0;
 
 let audio = new Audio("sound.mp3");
 
@@ -42,13 +45,14 @@ const countDown = (minutes, id) => {
         );
         let seconds = Math.floor(((timer * 1000) % (1000 * 60)) / 1000);
         timer--;
-        document.getElementById(id).innerHTML = minutes + "m " + seconds + "s ";
+        document.getElementById(id).value = minutes + "m " + seconds + "s ";
       }
       if (timer <= 0) {
         clearInterval(x);
         audio.play();
-        document.getElementById(id).innerHTML = "Done ✔️";
+        document.getElementById(id).value = "Done ✔️";
         document.getElementById(id).classList.add("done");
+        currentTime++;
         resolve();
       }
     }, 1000);
@@ -56,17 +60,17 @@ const countDown = (minutes, id) => {
 };
 
 start.addEventListener("click", () => {
-  countDown(5, "warmup")
-    .then(() => countDown(1, "break1"))
-    .then(() => countDown(7, "round1"))
-    .then(() => countDown(1, "break2"))
-    .then(() => countDown(7, "round2"))
-    .then(() => countDown(1, "break3"))
-    .then(() => countDown(7, "round3"))
-    .then(() => countDown(1, "break4"))
-    .then(() => countDown(7, "round4"))
-    .then(() => countDown(1, "break5"))
-    .then(() => countDown(5, "cooldown"));
+  countDown(times[currentTime].value, "warmup")
+    .then(() => countDown(times[currentTime].value, "break1"))
+    .then(() => countDown(times[currentTime].value, "round1"))
+    .then(() => countDown(times[currentTime].value, "break2"))
+    .then(() => countDown(times[currentTime].value, "round2"))
+    .then(() => countDown(times[currentTime].value, "break3"))
+    .then(() => countDown(times[currentTime].value, "round3"))
+    .then(() => countDown(times[currentTime].value, "break4"))
+    .then(() => countDown(times[currentTime].value, "round4"))
+    .then(() => countDown(times[currentTime].value, "break5"))
+    .then(() => countDown(times[currentTime].value, "cooldown"));
 });
 
 window.addEventListener("keydown", (e) => {
