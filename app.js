@@ -7,12 +7,14 @@ let activeArray = document.getElementsByClassName("active");
 
 let audio = new Audio("sound.mp3");
 
+// remove active class from each section div
 function removeActiveClasses() {
   sections.forEach((section) => {
     section.classList.remove("active");
   });
 }
 
+// pause and resume countDown if isPause changes
 function pauseCountdown() {
   if (!isPause) {
     isPause = true;
@@ -29,6 +31,9 @@ function pauseCountdown() {
   }
 }
 
+// removes active class from any previous section and adds active class to current section,
+// displays minutes and seconds in section, refreshes every seconds, once countdown runs down,
+// plays sound, adds done class and done text to inner html.
 const countDown = (minutes, id) => {
   removeActiveClasses();
   document.getElementById(id).classList.add("active");
@@ -55,6 +60,7 @@ const countDown = (minutes, id) => {
   });
 };
 
+// Upon click on start runs countDown function once previous function is resolved
 start.addEventListener("click", () => {
   countDown(5, "warmup")
     .then(() => countDown(1, "break1"))
@@ -69,12 +75,14 @@ start.addEventListener("click", () => {
     .then(() => countDown(5, "cooldown"));
 });
 
+// upon pressing spacebar runs pause and resume function
 window.addEventListener("keydown", (e) => {
   if (e.code == "Space") {
     pauseCountdown;
   }
 });
 
+// upon click on pause runs pause and resume function
 pause.addEventListener("click", () => {
   pauseCountdown();
 });
