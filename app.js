@@ -52,7 +52,7 @@ start.addEventListener("click", () => {
     .then(() => countDown(5, "cooldown"));
 });
 
-pause.addEventListener("click", () => {
+function pauseCountdown() {
   if (!isPause) {
     isPause = true;
     pause.innerHTML = "Resume";
@@ -65,5 +65,15 @@ pause.addEventListener("click", () => {
     sections.forEach((section) => {
       section.classList.replace("pause", "active");
     });
+  }
+}
+
+pause.addEventListener("click", () => {
+  pauseCountdown();
+});
+
+document.addEventListener("keypress", (e) => {
+  if (e == " ") {
+    pauseCountdown;
   }
 });
