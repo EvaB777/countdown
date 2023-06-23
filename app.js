@@ -62,7 +62,7 @@ const countDown = (minutes, id) => {
 
 // Upon click on start runs countDown function once previous function is resolved
 start.addEventListener("click", () => {
-  countDown(0,5, "warmup")
+  countDown(0.5, "warmup")
     .then(() => countDown(1, "break1"))
     .then(() => countDown(7, "round1"))
     .then(() => countDown(1, "break2"))
